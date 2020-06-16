@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,12 +29,14 @@ public class Produkt {
     @Column(name = "pocet_objednani", nullable = false)
     private Integer pocetObjednani;
 
-
     @ManyToOne
     @JoinColumn(name = "kategoria_id", nullable = false)
     private Kategoria kategoria;
 
     @OneToMany(mappedBy = "produktId")
     private Set<Galeria> galeria;
+
+    @OneToMany(mappedBy = "produktId")
+    private Set<Atribut> atributy;
 
 }
