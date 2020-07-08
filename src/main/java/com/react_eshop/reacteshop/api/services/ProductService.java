@@ -6,9 +6,14 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.util.List;
 
 public interface ProductService {
-    List<Produkt> findAll(Integer filter);
 
-    List<Produkt> findByCategory(Integer category, Integer filter);
+    List<Produkt> findAll(Integer filter, Float pricerange);
+
+    List<Produkt> findByCategory(Integer category, Integer filter, Float priceRange);
 
     List<Produkt> findPopular();
+
+    List<Produkt> findNew();
+
+    Produkt getById(Integer id);
 }
