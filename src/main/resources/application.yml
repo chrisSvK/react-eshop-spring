@@ -4,3 +4,5 @@ spring:
     url: jdbc:postgresql://localhost:5433/react-eshop
     username: postgres
     password: gigaset123
+server:
+    port: 8081

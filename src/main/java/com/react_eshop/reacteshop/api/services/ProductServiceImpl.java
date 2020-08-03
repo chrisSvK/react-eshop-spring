@@ -64,6 +64,29 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Produkt> findCaj(Integer filter, Float priceRange) {
+        if (filter != null)
+            switch (filter) {
+                case 2:
+                    return productRepository.findByCaj( Sort.by(Sort.Direction.DESC, "name"), priceRange);
+                case 3:
+                    return productRepository.findByCajASC( priceRange);
+                case 4:
+                    //return productRepository.findByCajDESC( priceRange);
+                case 5:
+                    return productRepository.findByCaj( Sort.by(Sort.Direction.ASC, "datumPridania"), priceRange);
+                case 6:
+                    return productRepository.findByCaj( Sort.by(Sort.Direction.DESC, "datumPridania"), priceRange);
+                case 7:
+                    return productRepository.findByCaj( Sort.by(Sort.Direction.DESC, "pocetObjednani"), priceRange);
+                default:
+                    return productRepository.findByCaj( Sort.by(Sort.Direction.ASC, "name"), priceRange);
+            }
+        else
+            return productRepository.findByCaj( Sort.by(Sort.Direction.ASC, "name"), 50.0f);
+    }
+
+    @Override
     public List<Produkt> findPopular() {
         return productRepository.findPopular();
     }

@@ -2,7 +2,7 @@ package com.react_eshop.reacteshop.api.controllers;
 
 import com.react_eshop.reacteshop.api.dao.model.Produkt;
 import com.react_eshop.reacteshop.api.services.ProductService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+//import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +65,29 @@ public class ProductController {
             }
         } else
             return productService.findByCategory(category, 1, 50.0f);
+    }
+
+    @GetMapping(value = {"caj/{filter}/{priceRange}", "caj"})
+    public List<Produkt> findAllCaj(@PathVariable(name = "filter", required = false) String filter, @PathVariable(name = "priceRange", required = false) Float priceRange) {
+        if (filter != null) {
+            switch (filter) {
+                case "filter2":
+                    return productService.findCaj(2, priceRange);
+                case "filter3":
+                    return productService.findCaj( 3, priceRange);
+                case "filter4":
+                    return productService.findCaj( 4 ,priceRange);
+                case "filter5":
+                    return productService.findCaj( 5, priceRange);
+                case "filter6":
+                    return productService.findCaj( 6, priceRange);
+                case "filter7":
+                    return productService.findCaj( 7, priceRange);
+                default:
+                    return productService.findCaj( 1, priceRange);
+            }
+        } else
+            return productService.findCaj(1, 50.0f);
     }
 
     @GetMapping("{id}")

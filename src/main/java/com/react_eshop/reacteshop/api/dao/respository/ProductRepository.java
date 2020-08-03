@@ -31,11 +31,21 @@ public interface ProductRepository extends CrudRepository<Produkt, Long> {
     @Query("select p from Produkt p JOIN Atribut a on p.produktId = a.produktId where p.kategoria.kategoriaId = ?1  and a.cena<= ?2 order by a.cena DESC")
     List<Produkt> findByKategoriaIdValueDESC(Integer kategoriaId, Float pricerange);
 
+    @Query("select p from Produkt p JOIN Atribut a on p.produktId = a.produktId where " +
+            "p.kategoria.kategoriaId = 5 OR p.kategoria.kategoriaId = 6 " +
+            "OR p.kategoria.kategoriaId = 7 OR p.kategoria.kategoriaId = 8  and a.cena<= ?1 ")
+    List<Produkt> findByCaj(Sort s, Float pricerange);
+
+    @Query("select p from Produkt p  JOIN Atribut a on p.produktId = a.produktId where p.kategoria.kategoriaId = 5 OR p.kategoria.kategoriaId = 6 " +
+            "            OR p.kategoria.kategoriaId = 7 OR p.kategoria.kategoriaId = 8 and a.cena<= ?1 order by a.cena ASC")
+    List<Produkt> findByCajASC(Float pricerange);
+
     @Query(value = "select * from Produkt p order by p.pocet_objednani DESC LIMIT 6", nativeQuery = true)
     List<Produkt> findPopular();
 
     @Query(value = "select * from Produkt p order by p.datum_pridania DESC LIMIT 6", nativeQuery = true)
     List<Produkt> findNew();
+
 
 //    @Query(value = "select * from Produkt p join Kategoria k on p.kategoria_id = k.kategoria_id and p.kategoria_id = ?1",
 //            nativeQuery = true)
